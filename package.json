@@ -1,0 +1,9 @@
+{
+  "name": "delegatable-nft",
+  "workspaces": [
+    "packages/delegatable-eth-ts",
+    "packages/one-of-one-creation"
+  ],
+  "dependencies": {
+  }
+}
