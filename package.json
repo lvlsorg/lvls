@@ -1,8 +1,8 @@
 {
-  "name": "delegatable-nft",
+  "name": "lvls",
   "workspaces": [
-    "packages/delegatable-eth-ts",
-    "packages/one-of-one-creation"
+    "packages/lvls-app",
+    "packages/lvls-contract"
   ],
   "dependencies": {
   }
