@@ -9,3 +9,4 @@ typechain
 packages/lvls-app/out
 local.json
 .gitmodules
+.next
