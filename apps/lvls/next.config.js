@@ -1,4 +1,8 @@
 module.exports = {
+  experimental: {
+    appDir: true,
+    externalDir: true,
+  },
   images: {
     remotePatterns: [
       {
