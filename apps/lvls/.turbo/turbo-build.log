@@ -1,0 +1,38 @@
+
+> lvls-app@0.1.0 build
+> next build
+
+warn  - You have enabled experimental features (appDir, externalDir) in next.config.js.
+warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+info  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Linting and checking validity of types...
+info  - Collecting page data...
+info  - Generating static pages (0/5)
+info  - Generating static pages (1/5)
+info  - Generating static pages (2/5)
+info  - Generating static pages (3/5)
+info  - Generating static pages (5/5)
+info  - Finalizing page optimization...
+
+Route (app)                                Size     First Load JS
+┌ ○ /                                      5.02 kB        79.1 kB
+├ ○ /api/hello                             0 B                0 B
+└ ○ /favicon.ico                           0 B                0 B
++ First Load JS shared by all              74.1 kB
+  ├ chunks/7fd0f9f1-7d10a309861f6189.js    50.2 kB
+  ├ chunks/866-2eb761a0d99f43ad.js         22 kB
+  ├ chunks/main-app-8a923cd8fd607471.js    217 B
+  └ chunks/webpack-b366dc00e883ec7a.js     1.68 kB
+
+Route (pages)                              Size     First Load JS
+─ ○ /404                                   178 B            86 kB
++ First Load JS shared by all              85.8 kB
+  ├ chunks/main-cafd7e466784a58e.js        83.9 kB
+  ├ chunks/pages/_app-415a5670032b79f5.js  190 B
+  └ chunks/webpack-b366dc00e883ec7a.js     1.68 kB
+
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
