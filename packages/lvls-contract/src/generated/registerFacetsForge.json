@@ -1,0 +1,222 @@
+{
+  "DiamondCutFacet": {
+    "functionSelectors": [
+      "0x1f931c1c"
+    ],
+    "id": "0xad42985fd120c8d8864ab54d5cae09db456125ca",
+    "name": "DiamondCutFacet"
+  },
+  "0xad42985fd120c8d8864ab54d5cae09db456125ca": {
+    "functionSelectors": [
+      "0x1f931c1c"
+    ],
+    "id": "0xad42985fd120c8d8864ab54d5cae09db456125ca",
+    "name": "DiamondCutFacet"
+  },
+  "DiamondLoupeFacet": {
+    "functionSelectors": [
+      "0xcdffacc6",
+      "0x52ef6b2c",
+      "0xadfca15e",
+      "0x7a0ed627"
+    ],
+    "id": "0x2229211e4ea8f43facbc59c41df0b18e465737f2",
+    "name": "DiamondLoupeFacet"
+  },
+  "0x2229211e4ea8f43facbc59c41df0b18e465737f2": {
+    "functionSelectors": [
+      "0xcdffacc6",
+      "0x52ef6b2c",
+      "0xadfca15e",
+      "0x7a0ed627"
+    ],
+    "id": "0x2229211e4ea8f43facbc59c41df0b18e465737f2",
+    "name": "DiamondLoupeFacet"
+  },
+  "OwnershipFacet": {
+    "functionSelectors": [
+      "0x8da5cb5b",
+      "0xf2fde38b"
+    ],
+    "id": "0xc270ea653cbd09aaba98a6cddbb78692b0762ac4",
+    "name": "OwnershipFacet"
+  },
+  "0xc270ea653cbd09aaba98a6cddbb78692b0762ac4": {
+    "functionSelectors": [
+      "0x8da5cb5b",
+      "0xf2fde38b"
+    ],
+    "id": "0xc270ea653cbd09aaba98a6cddbb78692b0762ac4",
+    "name": "OwnershipFacet"
+  },
+  "ERC725YFacet": {
+    "functionSelectors": [
+      "0x4e3e6e9c",
+      "0x54f6127f",
+      "0xdedff9c6",
+      "0x14a6e293",
+      "0x7f23690c",
+      "0x97902421"
+    ],
+    "id": "0x855554cf03306ac4bb3bec75b1809dae78b2c759",
+    "name": "ERC725YFacet"
+  },
+  "0x855554cf03306ac4bb3bec75b1809dae78b2c759": {
+    "functionSelectors": [
+      "0x4e3e6e9c",
+      "0x54f6127f",
+      "0xdedff9c6",
+      "0x14a6e293",
+      "0x7f23690c",
+      "0x97902421"
+    ],
+    "id": "0x855554cf03306ac4bb3bec75b1809dae78b2c759",
+    "name": "ERC725YFacet"
+  },
+  "LSP7DigitalAssetFacet": {
+    "functionSelectors": [
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0x2d7667c9"
+    ],
+    "id": "0xc93695b15f2ff765aa3d13c81bc76ee38d96daae",
+    "name": "LSP7DigitalAssetFacet"
+  },
+  "0xc93695b15f2ff765aa3d13c81bc76ee38d96daae": {
+    "functionSelectors": [
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0x2d7667c9"
+    ],
+    "id": "0xc93695b15f2ff765aa3d13c81bc76ee38d96daae",
+    "name": "LSP7DigitalAssetFacet"
+  },
+  "XPLSP7TokenFacet": {
+    "functionSelectors": [
+      "0xed6fe28d",
+      "0xdd62ed3e",
+      "0x095ea7b3",
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0xd646f3fc",
+      "0x8f9c14e7",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x04e7e0b9",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0xa9059cbb",
+      "0x2d7667c9",
+      "0x23b872dd",
+      "0xab42d066"
+    ],
+    "id": "0x0e095396ca2286ee1426a4ad9a153481aa4e86c9",
+    "name": "XPLSP7TokenFacet"
+  },
+  "0x0e095396ca2286ee1426a4ad9a153481aa4e86c9": {
+    "functionSelectors": [
+      "0xed6fe28d",
+      "0xdd62ed3e",
+      "0x095ea7b3",
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0xd646f3fc",
+      "0x8f9c14e7",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x04e7e0b9",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0xa9059cbb",
+      "0x2d7667c9",
+      "0x23b872dd",
+      "0xab42d066"
+    ],
+    "id": "0x0e095396ca2286ee1426a4ad9a153481aa4e86c9",
+    "name": "XPLSP7TokenFacet"
+  },
+  "LXPFacet": {
+    "functionSelectors": [
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0x2d7667c9"
+    ],
+    "id": "0x42d8da2d90f55eb4d337b63a5601ba13e8a4a62e",
+    "name": "LXPFacet"
+  },
+  "0x42d8da2d90f55eb4d337b63a5601ba13e8a4a62e": {
+    "functionSelectors": [
+      "0x47980aa3",
+      "0x65aeaa95",
+      "0x70a08231",
+      "0x44d17187",
+      "0x313ce567",
+      "0x7580d920",
+      "0xfad8b32a",
+      "0x18160ddd",
+      "0x760d9bba",
+      "0x2d7667c9"
+    ],
+    "id": "0x42d8da2d90f55eb4d337b63a5601ba13e8a4a62e",
+    "name": "LXPFacet"
+  },
+  "SoulboundDecayStakingFacet": {
+    "functionSelectors": [
+      "0x74de42e7",
+      "0xd3cbb7c8",
+      "0x3ba0b9a9",
+      "0xd6b7494f",
+      "0xeb9365c3",
+      "0xdb068e0e",
+      "0xa1bab447",
+      "0x9a6acf20",
+      "0x0cd8dd0b",
+      "0x87b5f114"
+    ],
+    "id": "0xa9fdbff4dfa55d664de916feb8065672fd98bb1d",
+    "name": "SoulboundDecayStakingFacet"
+  },
+  "0xa9fdbff4dfa55d664de916feb8065672fd98bb1d": {
+    "functionSelectors": [
+      "0x74de42e7",
+      "0xd3cbb7c8",
+      "0x3ba0b9a9",
+      "0xd6b7494f",
+      "0xeb9365c3",
+      "0xdb068e0e",
+      "0xa1bab447",
+      "0x9a6acf20",
+      "0x0cd8dd0b",
+      "0x87b5f114"
+    ],
+    "id": "0xa9fdbff4dfa55d664de916feb8065672fd98bb1d",
+    "name": "SoulboundDecayStakingFacet"
+  }
+}

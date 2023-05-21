@@ -1,14 +1,15 @@
-# Compiler files
-cache/
-out/
-
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
-
-# Docs
-docs/
-
-# Dotenv file
+node_modules
+src/typechain-types
+#Hardhat files
+cache
+forge-cache
+artifacts
 .env
+.DS_Store
+.next
+.vscode
+venv
+src/generated/typechain
+out/
+src/artifacts
+simulation/
