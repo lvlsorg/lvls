@@ -1,0 +1,114 @@
+{
+  "31337": {
+    "DiamondCutFacet": {
+      "facetAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "action": 0,
+      "functionSelectors": [
+        "0x1f931c1c"
+      ]
+    },
+    "DiamondLoupeFacet": {
+      "facetAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "action": 0,
+      "functionSelectors": [
+        "0xcdffacc6",
+        "0x52ef6b2c",
+        "0xadfca15e",
+        "0x7a0ed627"
+      ]
+    },
+    "OwnershipFacet": {
+      "facetAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "action": 0,
+      "functionSelectors": [
+        "0x8da5cb5b",
+        "0xf2fde38b"
+      ]
+    },
+    "ERC725YFacet": {
+      "facetAddress": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "action": 0,
+      "functionSelectors": [
+        "0x4e3e6e9c",
+        "0x54f6127f",
+        "0xdedff9c6",
+        "0x14a6e293",
+        "0x7f23690c",
+        "0x97902421"
+      ]
+    },
+    "LSP7DigitalAssetFacet": {
+      "facetAddress": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "action": 0,
+      "functionSelectors": [
+        "0x47980aa3",
+        "0x65aeaa95",
+        "0x70a08231",
+        "0x44d17187",
+        "0x313ce567",
+        "0x7580d920",
+        "0xfad8b32a",
+        "0x18160ddd",
+        "0x760d9bba",
+        "0x2d7667c9"
+      ]
+    },
+    "XPLSP7TokenFacet": {
+      "facetAddress": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "action": 0,
+      "functionSelectors": [
+        "0xed6fe28d",
+        "0xdd62ed3e",
+        "0x095ea7b3",
+        "0x47980aa3",
+        "0x65aeaa95",
+        "0x70a08231",
+        "0x44d17187",
+        "0x313ce567",
+        "0xd646f3fc",
+        "0x8f9c14e7",
+        "0x7580d920",
+        "0xfad8b32a",
+        "0x04e7e0b9",
+        "0x18160ddd",
+        "0x760d9bba",
+        "0xa9059cbb",
+        "0x2d7667c9",
+        "0x23b872dd",
+        "0xab42d066"
+      ]
+    },
+    "LXPFacet": {
+      "facetAddress": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "action": 0,
+      "functionSelectors": [
+        "0x47980aa3",
+        "0x65aeaa95",
+        "0x70a08231",
+        "0x44d17187",
+        "0x313ce567",
+        "0x7580d920",
+        "0xfad8b32a",
+        "0x18160ddd",
+        "0x760d9bba",
+        "0x2d7667c9"
+      ]
+    },
+    "SoulboundDecayStakingFacet": {
+      "facetAddress": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "action": 0,
+      "functionSelectors": [
+        "0x74de42e7",
+        "0xd3cbb7c8",
+        "0x3ba0b9a9",
+        "0xd6b7494f",
+        "0xeb9365c3",
+        "0xdb068e0e",
+        "0xa1bab447",
+        "0x9a6acf20",
+        "0x0cd8dd0b",
+        "0x87b5f114"
+      ]
+    }
+  }
+}

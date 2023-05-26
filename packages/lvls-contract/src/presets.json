@@ -1,0 +1,30 @@
+{
+    "xpToken" : [
+        "DiamondCutFacet",
+        "DiamondLoupeFacet",
+        "OwnershipFacet",
+        "ERC725YFacet",
+        "XPLSP7TokenFacet"
+    ],
+    "xpSoulboundDecayStaking": [
+        "DiamondCutFacet",
+        "DiamondLoupeFacet",
+        "OwnershipFacet",
+        "ERC725YFacet",
+        "SoulboundDecayStakingFacet"
+    ],
+    "lxpToken": [
+        "DiamondCutFacet",
+        "DiamondLoupeFacet",
+        "OwnershipFacet",
+        "ERC725YFacet",
+        "LXPFacet"
+    ],
+    "rewardToken": [
+        "DiamondCutFacet",
+        "DiamondLoupeFacet",
+        "OwnershipFacet",
+        "ERC725YFacet",
+        "LSP7DigitalAssetFacet"
+    ]
+}
