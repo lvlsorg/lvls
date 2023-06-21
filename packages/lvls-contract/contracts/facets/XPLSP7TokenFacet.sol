@@ -43,7 +43,7 @@ contract XPLSP7TokenFacet is LSP7DigitalAssetFacet {
     function decay(address account) internal {
         LibXP.LibXPStorage storage xps = LibXP.libXPStorage();
         uint256 decayBlocks = block.number - xps._balances[account].lastDecayBlock;
-        uint256 decayAmount = (xps._balances[account].activeVirtualBalance * decayBlocks * xps._decayRate) / 1000;
+        uint256 decayAmount = xps._decayRate * decayBlocks;
         xps._balances[account].activeVirtualBalance -= decayAmount;
         xps._balances[account].inactiveVirtualBalance += decayAmount;
         xps._balances[account].lastDecayBlock = block.number;
@@ -116,20 +116,26 @@ contract XPLSP7TokenFacet is LSP7DigitalAssetFacet {
         return balance /* + decayedBalance*/;
     }
 
+    // Decay amount should be a flat rate per block and not a percentage and we should be able to scale to 0.0001
     function activeVirtualBalanceOf(address account) public view returns (uint256) {
         LibXP.LibXPStorage storage xps = LibXP.libXPStorage();
         uint256 decayBlocks = block.number - xps._balances[account].lastDecayBlock;
-        uint256 decayAmount = (xps._balances[account].activeVirtualBalance * decayBlocks * xps._decayRate) / 1000;
+        uint256 decayAmount = xps._decayRate * decayBlocks;
         if (xps._balances[account].activeVirtualBalance > decayAmount) {
             return xps._balances[account].activeVirtualBalance - decayAmount;
         }
         return 0;
     }
 
+    // Decay amount should be a flat rate per block and not a percentage
+    // 1 xp per block or 100xp per block or 0.1xp per block up to 1000xp
     function inactiveVirtualBalanceOf(address account) public view returns (uint256) {
         LibXP.LibXPStorage storage xps = LibXP.libXPStorage();
         uint256 decayBlocks = block.number - xps._balances[account].lastDecayBlock;
-        uint256 decayAmount = (xps._balances[account].activeVirtualBalance * decayBlocks * xps._decayRate) / 1000;
+        uint256 decayAmount = xps._decayRate * decayBlocks;
+        if (decayAmount > xps._balances[account].activeVirtualBalance) {
+            decayAmount = xps._balances[account].activeVirtualBalance;
+        }
         return xps._balances[account].inactiveVirtualBalance + decayAmount;
     }
 
