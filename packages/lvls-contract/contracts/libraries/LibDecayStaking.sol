@@ -1,3 +1,5 @@
+pragma solidity ^0.8.15;
+
 library LibDecayStaking {
     struct DecayStakingStorage {
         uint256 _exchangeRate;

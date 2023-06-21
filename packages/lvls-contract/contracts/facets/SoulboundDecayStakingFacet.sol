@@ -1,10 +1,11 @@
+pragma solidity ^0.8.15;
 import {LibDecayStaking} from "../libraries/LibDecayStaking.sol";
 import {LibOwnership} from "../libraries/LibOwnership.sol";
 import {ILSP7DigitalAsset} from "../interfaces/ILSP7DigitalAsset.sol";
 import {ILSP7XP} from "../interfaces/ILSP7XP.sol";
 import "hardhat/console.sol";
 
-contract SoulboundDecayStakingFacet {
+contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
     function setDecayStaking(
         uint256 _exchangeRate,
         uint256 _penaltyRate,
@@ -18,6 +19,13 @@ contract SoulboundDecayStakingFacet {
         ds._xpTokenAddress = _xpTokenAddress;
         ds._lxpTokenAddress = _lxpTokenAddress;
         ds._rewardTokenAddress = _rewardTokenAddress;
+    }
+
+    function setStakingConfig(uint256 _exchangeRate, uint256 _penaltyRate, uint256 _decayRate, address _rewardTokenAddress) public onlyOwner {
+        setExchangeRate(_exchangeRate);
+        setPenaltyRate(_penaltyRate);
+        setDecayRate(_decayRate);
+        setRewardTokenAddress(_rewardTokenAddress);
     }
 
     function _distributeXP(address account, uint256 amount) internal {
@@ -81,6 +89,11 @@ contract SoulboundDecayStakingFacet {
         return ds._xpTokenAddress;
     }
 
+    function lxpTokenAddress() public view returns (address) {
+        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
+        return ds._lxpTokenAddress;
+    }
+
     function setExchangeRate(uint256 _exchangeRate) public {
         LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
         ds._exchangeRate = _exchangeRate;
@@ -91,7 +104,12 @@ contract SoulboundDecayStakingFacet {
         ds._penaltyRate = _penaltyRate;
     }
 
-    function setXPTokenAddress(address _xpTokenAddress) public {
+    function setXPTokenAddress(address _xpTokenAddress) public onlyOwner {
+        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
+        ds._xpTokenAddress = _xpTokenAddress;
+    }
+
+    function setLXPTokenAddress(address _xpTokenAddress) public onlyOwner {
         LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
         ds._xpTokenAddress = _xpTokenAddress;
     }
