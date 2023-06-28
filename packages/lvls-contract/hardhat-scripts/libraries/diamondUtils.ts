@@ -11,7 +11,7 @@ import { keccak256 } from "ethers/lib/utils";
 export enum FacetCutAction {
   Add = 0,
   Replace = 1,
-  Remove = 2,
+  Remove = 2
 }
 
 export interface DiamondCoreDeployed {
@@ -41,7 +41,7 @@ export interface FacetCut {
   cut: Cut;
 }
 
-export type DeploymentConfig = Record<number, Record<string, string>>;
+export type DeploymentConfig = Record<number, Record<string, Cut>>;
 
 const CONFIG_DEFAULT_PATH = "./src/generated/deployed.json";
 // Read deployed.json configuration
@@ -57,7 +57,7 @@ export async function getDeploymentConfig(
 }
 
 export interface FacetConfigs {
-  [k: string]: string;
+  [k: string]: Cut;
 }
 
 export async function setFacetSubscription(
@@ -98,9 +98,9 @@ export async function setDeploymentConfig(
     DiamondCutFacet: coreDiamond.diamondCutFacet.address,
     DiamondLoupeFacet: coreDiamond.diamondLoupeFacet.address,
     DiamondInitFacet: coreDiamond.diamondInit.address,
-    DiamondLauncherFacet: coreDiamond.diamondLauncherFacet.address,
+    DiamondLauncherFacet: coreDiamond.diamondLauncherFacet.address
   };
-  setDeploymentConfigFacets(configPath, chainId, deployedMap, facetCuts);
+  setDeploymentConfigFacets(configPath, chainId, {} /*deployedMap*/, facetCuts);
 }
 
 export async function deployDiamondCore(): Promise<DiamondCoreDeployed> {
@@ -169,7 +169,7 @@ export async function deployDiamondCore(): Promise<DiamondCoreDeployed> {
     diamondCutFacet,
     registerDiamondCutFacet,
     diamondLoupeFacet,
-    diamondLauncherFacet,
+    diamondLauncherFacet
   };
 }
 
@@ -218,10 +218,9 @@ export async function simpleDiamondCut(
 ) {
   const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddr);
   const DiamondInit = await ethers.getContractFactory("DiamondInit");
-  const functionCall = DiamondInit.interface.encodeFunctionData("init");
   // Cut the Diamond
 
-  const tx = await diamondCut.diamondCut(cuts, diamondInitAddr, functionCall);
+  const tx = await diamondCut.diamondCut(cuts, diamondInitAddr, "0x");
   const receipt = await tx.wait();
   if (!receipt.status) {
     throw Error(`Diamond upgrade failed: ${tx.hash}`);
@@ -277,20 +276,22 @@ export function getCuts(facets: FacetContracts): FacetCut[] {
     cut: {
       facetAddress: facets[key].address,
       action: FacetCutAction.Add,
-      functionSelectors: getSelectors(facets[key]),
-    },
+      functionSelectors: getSelectors(facets[key])
+    }
   }));
   return cuts;
 }
 // Get facets with a name key
-export function getCutsWithAddr(facets: {name:string, contract: Contract, address: string}[]): FacetCut[] {
+export function getCutsWithAddr(
+  facets: { name: string; contract: Contract; address: string }[]
+): FacetCut[] {
   const cuts: FacetCut[] = facets.map((f) => ({
     name: f.name,
     cut: {
       facetAddress: f.address,
       action: FacetCutAction.Add,
-      functionSelectors: getSelectors(f.contract),
-    },
+      functionSelectors: getSelectors(f.contract)
+    }
   }));
   return cuts;
 }

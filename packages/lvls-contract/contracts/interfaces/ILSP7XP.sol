@@ -29,7 +29,7 @@ interface ILSP7XP {
 
     function decreaseAllowance(address spender, uint256 subtractedValue) external returns (bool);
 
-    function setDeacyRate(uint256 _decayRate) external;
+    function setDecayRate(uint256 _decayRate) external;
 
     function listHolders() external view returns (address[] memory);
 

@@ -16,8 +16,9 @@ contract XPLSP7TokenFacet is LSP7DigitalAssetFacet {
         _mint(to, amount, allowNonLSP1Recipient, data);
         console.log("minting complete");
         xps._balances[to].activeVirtualBalance += amount;
+        // TODO: this is redundant as decay will set the block number to the current block
+        // do this to make the hook apparent and more readable
         xps._balances[to].lastDecayBlock = block.number;
-        console.log("update holders");
         updateHolders(to);
         console.log("updated holders");
     }
@@ -42,8 +43,25 @@ contract XPLSP7TokenFacet is LSP7DigitalAssetFacet {
 
     function decay(address account) internal {
         LibXP.LibXPStorage storage xps = LibXP.libXPStorage();
+        // when you initialize the contract, the last decay block is 0
+        // so we need to set it to the current block number or just
+        // return
+        if (account == address(0)) {
+            return;
+        }
+
+        if (xps._balances[account].lastDecayBlock == 0) {
+            xps._balances[account].lastDecayBlock = block.number;
+            return;
+        }
         uint256 decayBlocks = block.number - xps._balances[account].lastDecayBlock;
         uint256 decayAmount = xps._decayRate * decayBlocks;
+        console.log("decay amoutn", decayAmount);
+        console.log("decay blocks", decayBlocks);
+        console.log("decay rate", xps._decayRate);
+        console.log("last decay block", xps._balances[account].lastDecayBlock);
+        console.log("current block", block.number);
+        console.log("active virtual balance", xps._balances[account].activeVirtualBalance);
         xps._balances[account].activeVirtualBalance -= decayAmount;
         xps._balances[account].inactiveVirtualBalance += decayAmount;
         xps._balances[account].lastDecayBlock = block.number;

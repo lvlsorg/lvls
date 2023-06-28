@@ -10,7 +10,11 @@ interface ILvlsContractLauncher {
 
     function setLvlsFacetCuts(IDiamondCut.FacetCut[] calldata _lvlsFacetCuts) external;
 
+    function setRewardFacetCuts(IDiamondCut.FacetCut[] calldata _rewardTokenFacetCuts) external;
+
     function setDiamondAddresses(address diamondCutAddress, address diamondLoupe, address diamondInit) external;
+
+    function launchRewardToken(address owner) external returns (address);
 
     function launch(address owner) external returns (address, address, address);
 

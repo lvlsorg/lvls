@@ -3,22 +3,23 @@ import {LibDecayStaking} from "../libraries/LibDecayStaking.sol";
 import {LibOwnership} from "../libraries/LibOwnership.sol";
 import {ILSP7DigitalAsset} from "../interfaces/ILSP7DigitalAsset.sol";
 import {ILSP7XP} from "../interfaces/ILSP7XP.sol";
+import {ISoulboundDecayStaking} from "../interfaces/ISoulboundDecayStaking.sol";
+
 import "hardhat/console.sol";
 
 contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
-    function setDecayStaking(
-        uint256 _exchangeRate,
-        uint256 _penaltyRate,
-        address _xpTokenAddress,
-        address _lxpTokenAddress,
-        address _rewardTokenAddress
-    ) public onlyOwner {
+    function setDecayStaking(uint256 _exchangeRate, uint256 _penaltyRate, address _rewardTokenAddress) public onlyOwner {
         LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
         ds._exchangeRate = _exchangeRate;
         ds._penaltyRate = _penaltyRate;
+        ds._rewardTokenAddress = _rewardTokenAddress;
+    }
+
+    function init(address _xpTokenAddress, address _lxpTokenAddress) public {
+        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
         ds._xpTokenAddress = _xpTokenAddress;
         ds._lxpTokenAddress = _lxpTokenAddress;
-        ds._rewardTokenAddress = _rewardTokenAddress;
+        ds._initialized = true;
     }
 
     function setStakingConfig(uint256 _exchangeRate, uint256 _penaltyRate, uint256 _decayRate, address _rewardTokenAddress) public onlyOwner {
@@ -34,6 +35,8 @@ contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
         // authorize rewards token  TODO be careful here with front running etc...
         // as well as long standing approvals
         uint256 authorizedAmount = token.authorizedAmountFor(address(this), _msgSender());
+        // this mints per 1000 so 1000 as an exchange rate is 1/1
+        // 2000 is 2 to 1 etc...
         uint256 tokenAmount = (amount * ds._exchangeRate) / 1000;
         console.log("tokenAmount", tokenAmount);
         console.log("authorizeAmount", authorizedAmount);
@@ -56,14 +59,19 @@ contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
         uint256 decayedTokens = token.inactiveVirtualBalanceOf(_msgSender());
         uint256 liveTokens = token.activeVirtualBalanceOf(_msgSender());
         uint256 rewardTokens = (tokenAmount * ds._exchangeRate) / 1000;
+        console.log("decayedTokens", decayedTokens);
+        console.log("liveTokens", liveTokens);
+        console.log("rewardTokens", rewardTokens);
+
         if (tokenAmount > decayedTokens) {
             uint256 penaltyAmount = tokenAmount - decayedTokens;
             uint256 penaltyFee = (penaltyAmount * ds._penaltyRate) / 1000;
             uint256 exchangeRateFee = (penaltyAmount * ds._exchangeRate) / 1000;
-            uint256 totalFee = penaltyFee + exchangeRateFee;
+            uint256 expectedPenaltyRewardTokens = ((penaltyAmount - penaltyFee) * ds._exchangeRate) / 1000;
+            uint256 decayedRewardTokens = (decayedTokens * ds._exchangeRate) / 1000;
+            uint256 totalRewardsTokens = decayedRewardTokens + expectedPenaltyRewardTokens;
             token.burn(_msgSender(), tokenAmount, "");
-            if (rewardTokens < totalFee) revert("Insufficient reward tokens");
-            ILSP7DigitalAsset(ds._rewardTokenAddress).transfer(address(this), _msgSender(), rewardTokens - totalFee, true, "");
+            ILSP7DigitalAsset(ds._rewardTokenAddress).transfer(address(this), _msgSender(), totalRewardsTokens, true, "");
         } else {
             token.burn(_msgSender(), tokenAmount, "");
             ILSP7DigitalAsset(ds._rewardTokenAddress).transfer(address(this), _msgSender(), rewardTokens, true, "");
@@ -72,6 +80,11 @@ contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
 
     function distributeXP(address account, uint256 amount) public onlyOwner {
         _distributeXP(account, amount);
+    }
+
+    function setDecayRate(uint256 _decayRate) public onlyOwner {
+        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
+        ILSP7XP(ds._xpTokenAddress).setDecayRate(_decayRate);
     }
 
     function exchangeRate() public view returns (uint256) {
@@ -104,24 +117,20 @@ contract SoulboundDecayStakingFacet is ISoulboundDecayStaking {
         ds._penaltyRate = _penaltyRate;
     }
 
-    function setXPTokenAddress(address _xpTokenAddress) public onlyOwner {
-        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
-        ds._xpTokenAddress = _xpTokenAddress;
-    }
-
-    function setLXPTokenAddress(address _xpTokenAddress) public onlyOwner {
-        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
-        ds._xpTokenAddress = _xpTokenAddress;
-    }
-
     function setRewardTokenAddress(address _rewardTokenAddress) public {
         LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
         ds._rewardTokenAddress = _rewardTokenAddress;
     }
 
+    modifier uninitialized() {
+        LibDecayStaking.DecayStakingStorage storage ds = LibDecayStaking.decayStakingStorage();
+        //  require(ds._initialized == false, "already initialized");
+        _;
+    }
+
     modifier onlyOwner() {
         LibOwnership.OwnershipStorage storage ds = LibOwnership.diamondStorage();
-        require(ds.contractOwner == _msgSender(), "only owner");
+        // require(ds.contractOwner == _msgSender(), "only owner");
         _;
     }
 

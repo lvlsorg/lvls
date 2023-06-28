@@ -24,6 +24,20 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
         ls.diamondInitAddress = diamondInitAddress;
     }
 
+    function setRewardFacetCuts(IDiamondCut.FacetCut[] memory cuts) public onlyOwner {
+        LibLvlsLauncherStorage storage ls = LibLvlsContractLauncher.libLvlsLauncherStorage();
+        unchecked {
+            uint256 limit = ls.rewardTokenFacetCuts.length;
+            for (uint16 i; i < limit; i++) {
+                ls.rewardTokenFacetCuts.pop();
+            }
+            limit = cuts.length;
+            for (uint16 i; i < limit; i++) {
+                ls.rewardTokenFacetCuts.push(cuts[i]);
+            }
+        }
+    }
+
     function setLXPFacetCuts(IDiamondCut.FacetCut[] memory cuts) public onlyOwner {
         LibLvlsLauncherStorage storage ls = LibLvlsContractLauncher.libLvlsLauncherStorage();
         unchecked {
@@ -81,14 +95,24 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
         return LibPagination.paginateData(ls.deployedContractAddresses, offset, limit, asc);
     }
 
+    function launchRewardToken(address owner) public returns (address) {
+        LibLvlsLauncherStorage storage ls = LibLvlsContractLauncher.libLvlsLauncherStorage();
+        IDiamondLauncher diamond = IDiamondLauncher(
+            IDiamondLauncher(address(this)).launch(address(this), ls.diamondCutAddress, ls.diamondLoupeAddress)
+        );
+        // NOTE there's no init function for the diamond, so we don't need to call it
+        IDiamondCut(address(diamond)).diamondCut(ls.rewardTokenFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+
+        IERC173(address(diamond)).transferOwnership(owner);
+        return address(diamond);
+    }
+
     // This interface allows us to subscribe to
     function launch(address owner) public returns (address, address, address) {
         LibLvlsLauncherStorage storage ls = LibLvlsContractLauncher.libLvlsLauncherStorage();
         IDiamondLauncher diamond = IDiamondLauncher(
             IDiamondLauncher(address(this)).launch(address(this), ls.diamondCutAddress, ls.diamondLoupeAddress)
         );
-        // NOTE there's no init function for the diamond, so we don't need to call it
-        IDiamondCut(address(diamond)).diamondCut(ls.lvlsFacetCuts, address(ls.diamondInitAddress), new bytes(0));
 
         IDiamondLauncher xpDiamond = IDiamondLauncher(
             IDiamondLauncher(address(this)).launch(address(this), ls.diamondCutAddress, ls.diamondLoupeAddress)
@@ -100,6 +124,9 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
 
         IDiamondCut(address(xpDiamond)).diamondCut(ls.xpFacetCuts, address(ls.diamondInitAddress), new bytes(0));
         IDiamondCut(address(lxpDiamond)).diamondCut(ls.lxpFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+        IDiamondCut(address(diamond)).diamondCut(ls.lvlsFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+
+        ISoulboundDecayStaking(address(diamond)).init(address(xpDiamond), address(lxpDiamond));
 
         IERC173(address(diamond)).transferOwnership(owner);
         // NOTE here we transfer this as the owner of the lvls frame work contract
@@ -109,10 +136,6 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
         ls.deployedContractAddresses.push(address(diamond));
         ls.userAddressToLvlsContract[owner].push((address(diamond)));
         emit Launch(address(diamond), owner);
-
-        // TODO make these initialization params
-        ISoulboundDecayStaking(address(diamond)).setXPTokenAddress(address(xpDiamond));
-        ISoulboundDecayStaking(address(diamond)).setLXPTokenAddress(address(lxpDiamond));
 
         // NOTE here we return the address of the diamond, xpDiamond, and lxpDiamond
         return (address(diamond), address(xpDiamond), address(lxpDiamond));

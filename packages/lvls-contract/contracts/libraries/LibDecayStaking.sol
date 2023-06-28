@@ -7,6 +7,7 @@ library LibDecayStaking {
         address _xpTokenAddress;
         address _lxpTokenAddress;
         address _rewardTokenAddress;
+        bool _initialized;
     }
 
     bytes32 constant DECAY_STAKING_STORAGE_POSITION = keccak256("lvls.decay_staking.storage");

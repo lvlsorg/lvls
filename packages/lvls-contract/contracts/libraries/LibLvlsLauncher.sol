@@ -13,6 +13,7 @@ struct LibLvlsLauncherStorage {
     IDiamondCut.FacetCut[] xpFacetCuts;
     IDiamondCut.FacetCut[] lxpFacetCuts;
     IDiamondCut.FacetCut[] lvlsFacetCuts;
+    IDiamondCut.FacetCut[] rewardTokenFacetCuts;
     uint256 minFee;
     uint256 maxFee;
     uint256 feeMultiplier;

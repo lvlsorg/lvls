@@ -1,15 +1,7 @@
 pragma solidity ^0.8.15;
 
 interface ISoulboundDecayStaking {
-    function setDecayStaking(
-        uint256 _exchangeRate,
-        uint256 _penaltyRate,
-        address _xpTokenAddress,
-        address _lxpTokenAddress,
-        address _rewardTokenAddress
-    ) external;
-
-    function _distributeXP(address account, uint256 amount) external;
+    function setDecayStaking(uint256 _exchangeRate, uint256 _penaltyRate, address _rewardTokenAddress) external;
 
     function burnXP(uint256 tokenAmount) external;
 
@@ -29,9 +21,7 @@ interface ISoulboundDecayStaking {
 
     function setStakingConfig(uint256 _exchangeRate, uint256 _penaltyRate, uint256 _decayRate, address _rewardTokenAddress) external;
 
-    function setXPTokenAddress(address _xpTokenAddress) external;
-
-    function setLXPTokenAddress(address _lxpTokenAddress) external;
-
     function setRewardTokenAddress(address _rewardTokenAddress) external;
+
+    function init(address _xpTokenAddress, address _lxpTokenAddress) external;
 }
