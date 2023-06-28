@@ -1,3 +1,4 @@
+pragma solidity ^0.8.15;
 import {LSP7DigitalAssetFacet} from "./LSP7DigitalAssetFacet.sol";
 
 contract LXPFacet is LSP7DigitalAssetFacet {
