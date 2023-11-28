@@ -6,20 +6,37 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db-foo": "echo 'bar'",
+    "db:migrate": "ts-node ../../node_modules/.bin/knex migrate:latest",
+    "knex:migrate:make": "ts-node ../../node_modules/.bin/knex --knexfile lib/db/knexfile.ts migrate:make -x ts"
   },
   "dependencies": {
+    "@rjsf/core": "^5.8.1",
+    "@rjsf/utils": "^5.8.1",
+    "@rjsf/validator-ajv8": "^5.8.1",
     "@types/node": "18.15.11",
     "@types/react": "18.0.34",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.14",
+    "better-sqlite3": "^8.4.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "knex": "^2.4.2",
+    "lvls-contract": "^0.0.0-development",
     "next": "13.3.0",
     "postcss": "8.4.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "siwe": "^2.1.4",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/knex": "^0.16.1",
+    "@types/node-fetch": "^2.6.4",
+    "@typescript-eslint/parser": "^5.59.11",
+    "ts-node": "^10.9.1"
   }
 }
