@@ -1,0 +1,20 @@
+{
+  "name": "lvls-bot",
+  "version": "0.0.0-development",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "eslint": "^8.41.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
