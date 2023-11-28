@@ -104,6 +104,8 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
         IDiamondCut(address(diamond)).diamondCut(ls.rewardTokenFacetCuts, address(ls.diamondInitAddress), new bytes(0));
 
         IERC173(address(diamond)).transferOwnership(owner);
+
+        emit LaunchReward(address(diamond), owner);
         return address(diamond);
     }
 
@@ -123,8 +125,11 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
         );
 
         IDiamondCut(address(xpDiamond)).diamondCut(ls.xpFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+        console.log("xpDiamond address: %s", address(xpDiamond));
         IDiamondCut(address(lxpDiamond)).diamondCut(ls.lxpFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+        console.log("lxpDiamond address: %s", address(lxpDiamond));
         IDiamondCut(address(diamond)).diamondCut(ls.lvlsFacetCuts, address(ls.diamondInitAddress), new bytes(0));
+        console.log("lvls diamond address: %s", address(diamond));
 
         ISoulboundDecayStaking(address(diamond)).init(address(xpDiamond), address(lxpDiamond));
 
@@ -135,6 +140,7 @@ contract LvlsLauncherFacet is ILvlsContractLauncher {
 
         ls.deployedContractAddresses.push(address(diamond));
         ls.userAddressToLvlsContract[owner].push((address(diamond)));
+        console.log("emitting launch event");
         emit Launch(address(diamond), owner);
 
         // NOTE here we return the address of the diamond, xpDiamond, and lxpDiamond

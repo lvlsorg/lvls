@@ -13,6 +13,20 @@
     "id": "0xad42985fd120c8d8864ab54d5cae09db456125ca",
     "name": "DiamondCutFacet"
   },
+  "DiamondLauncherFacet": {
+    "functionSelectors": [
+      "0x92348597"
+    ],
+    "id": "0xc06217284858020e6de7793071f03904cb7163f3",
+    "name": "DiamondLauncherFacet"
+  },
+  "0xc06217284858020e6de7793071f03904cb7163f3": {
+    "functionSelectors": [
+      "0x92348597"
+    ],
+    "id": "0xc06217284858020e6de7793071f03904cb7163f3",
+    "name": "DiamondLauncherFacet"
+  },
   "DiamondLoupeFacet": {
     "functionSelectors": [
       "0xcdffacc6",
@@ -192,12 +206,15 @@
       "0x74de42e7",
       "0xd3cbb7c8",
       "0x3ba0b9a9",
+      "0xf09a4016",
+      "0x7bcee8d6",
       "0xd6b7494f",
-      "0xeb9365c3",
+      "0x04e7e0b9",
+      "0x8ffdb0de",
       "0xdb068e0e",
       "0xa1bab447",
       "0x9a6acf20",
-      "0x0cd8dd0b",
+      "0xcf761929",
       "0x87b5f114"
     ],
     "id": "0xa9fdbff4dfa55d664de916feb8065672fd98bb1d",
@@ -208,15 +225,58 @@
       "0x74de42e7",
       "0xd3cbb7c8",
       "0x3ba0b9a9",
+      "0xf09a4016",
+      "0x7bcee8d6",
       "0xd6b7494f",
-      "0xeb9365c3",
+      "0x04e7e0b9",
+      "0x8ffdb0de",
       "0xdb068e0e",
       "0xa1bab447",
       "0x9a6acf20",
-      "0x0cd8dd0b",
+      "0xcf761929",
       "0x87b5f114"
     ],
     "id": "0xa9fdbff4dfa55d664de916feb8065672fd98bb1d",
     "name": "SoulboundDecayStakingFacet"
+  },
+  "LvlsLauncherFacet": {
+    "functionSelectors": [
+      "0x33c7c026",
+      "0xd2cf6ecb",
+      "0x48bc2956",
+      "0xced72f87",
+      "0x92828671",
+      "0x5cf34bcf",
+      "0x214013ca",
+      "0x7a715c7c",
+      "0x2b758b2e",
+      "0x5b65b9ab",
+      "0xaebf1037",
+      "0xa43eabed",
+      "0xf0407e3e",
+      "0x05c4faa1"
+    ],
+    "id": "0x4794f8caee686bf1d42148345b76999362de4070",
+    "name": "LvlsLauncherFacet"
+  },
+  "0x4794f8caee686bf1d42148345b76999362de4070": {
+    "functionSelectors": [
+      "0x33c7c026",
+      "0xd2cf6ecb",
+      "0x48bc2956",
+      "0xced72f87",
+      "0x92828671",
+      "0x5cf34bcf",
+      "0x214013ca",
+      "0x7a715c7c",
+      "0x2b758b2e",
+      "0x5b65b9ab",
+      "0xaebf1037",
+      "0xa43eabed",
+      "0xf0407e3e",
+      "0x05c4faa1"
+    ],
+    "id": "0x4794f8caee686bf1d42148345b76999362de4070",
+    "name": "LvlsLauncherFacet"
   }
 }

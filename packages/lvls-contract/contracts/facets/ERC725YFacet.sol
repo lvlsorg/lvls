@@ -62,6 +62,7 @@ contract ERC725YFacet is ERC165, IERC725Y {
         _setData(dataKey, dataValue);
     }
 
+    // supports legacy and non legacy
     function setData(bytes32[] memory dataKeys, bytes[] memory dataValues) public payable onlyOwner {
         require(dataKeys.length == dataValues.length, "Keys length not equal to values length");
         for (uint256 i = 0; i < dataKeys.length; i = _uncheckedIncrement(i)) {

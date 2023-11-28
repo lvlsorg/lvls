@@ -13,6 +13,8 @@ interface ISoulboundDecayStaking {
 
     function xpTokenAddress() external view returns (address);
 
+    function lxpTokenAddress() external view returns (address);
+
     function setExchangeRate(uint256 _exchangeRate) external;
 
     function setPenaltyRate(uint256 _penaltyRate) external;

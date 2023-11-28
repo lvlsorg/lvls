@@ -27,4 +27,6 @@ interface ILvlsContractLauncher {
     function setFee(uint256 _minFee, uint256 _maxfee, uint256 multiplier) external;
 
     event Launch(address indexed addr, address indexed owner);
+
+    event LaunchReward(address indexed addr, address indexed owner);
 }

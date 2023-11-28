@@ -37,8 +37,8 @@ contract LvlsLauncherFacetTest is Test, TestFacetLookup {
         BlankDiamond blank = new BlankDiamond();
         LvlsLauncherFacet lvlsLauncherFacet = new LvlsLauncherFacet();
         DiamondLauncherFacet diamondLauncherFacet = new DiamondLauncherFacet();
-        DiamondLoupeFacet DiamondLoupeFacet = new DiamondLoupeFacet();
-        DiamondCutFacet DiamondCutFacet = new DiamondCutFacet();
+        DiamondLoupeFacet diamondLoupeFacet = new DiamondLoupeFacet();
+        DiamondCutFacet diamondCutFacet = new DiamondCutFacet();
 
         lsp7DigitalAssetFacet = new LSP7DigitalAssetFacet();
         lxpFacet = new LXPFacet();

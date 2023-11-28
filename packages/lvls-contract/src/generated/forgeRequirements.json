@@ -1,12 +1,14 @@
 {
   "global": [
     "DiamondCutFacet",
+    "DiamondLauncherFacet",
     "DiamondLoupeFacet",
     "OwnershipFacet",
     "ERC725YFacet",
     "LSP7DigitalAssetFacet",
     "XPLSP7TokenFacet",
     "LXPFacet",
-    "SoulboundDecayStakingFacet"
+    "SoulboundDecayStakingFacet",
+    "LvlsLauncherFacet"
   ]
 }

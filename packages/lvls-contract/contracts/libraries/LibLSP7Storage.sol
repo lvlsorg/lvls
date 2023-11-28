@@ -13,14 +13,19 @@ import "./LSP7Errors.sol";
 // constants
 import {_INTERFACEID_LSP1} from "../libraries/LSP1Constants.sol";
 import {_TYPEID_LSP7_TOKENSSENDER, _TYPEID_LSP7_TOKENSRECIPIENT} from "./LSP7Constants.sol";
+import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
+using EnumerableSet for EnumerableSet.AddressSet;
 struct LibLSP7Storage {
+    // --- Storage
     // --- Storage
 
     // Mapping from `tokenOwner` to an `amount` of tokens
     mapping(address => uint256) _tokenOwnerBalances;
     // Mapping a `tokenOwner` to an `operator` to `amount` of tokens.
     mapping(address => mapping(address => uint256)) _operatorAuthorizedAmount;
+    // Mapping an `address` to its authorized operator addresses.
+    mapping(address => EnumerableSet.AddressSet) _operators;
     uint256 _existingTokens;
     bool _isNonDivisible;
 }

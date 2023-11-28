@@ -2,8 +2,9 @@
 
 // require("@nomicfoundation/hardhat-toolbox");
 
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomiclabs/hardhat-ethers";
+// import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-ethers";
+// import { ethers } from "hardhat";
 import { keccak256 } from "ethers/lib/utils";
 import type * as nhEthers from "ethers";
 import path from "path";
@@ -26,7 +27,7 @@ import {
   ILvlsContractLauncher__factory,
   SoulboundDecayStakingFacet__factory
 } from "../src/generated/typechain";
-
+/*
 export const CONFIG_DEFAULT_PATH = "./src/generated/deployed.json";
 export const CONFIG_LAUNCHER_PATH = "./src/generated/launcher.json";
 export const TEST_CONFIG_DEFAULT_PATH = "./test/generated/deployed.json";
@@ -43,7 +44,7 @@ export const FORGE_REQUIREMENTS_CONFIG_PATH =
   "./src/generated/forgeRequirements.json";
 
 export const LOGGER_CONFIG_PATH = "./src/generated";
-
+console.log("yep", process.env.PRIV_KEY);
 export async function setDeploymentConfigFacets(
   configPath: string,
   chainId: number,
@@ -86,7 +87,7 @@ const launcherFacetContractNames = [
 
 const rewardsFacetContractNames = [
   "LSP7DigitalAssetFacet",
-  "DiamondCutFacet",
+  //"DiamondCutFacet",
   "DiamondLoupeFacet",
   "OwnershipFacet",
   "ERC725YFacet"
@@ -100,7 +101,7 @@ const lvlsFacetContractNames = [
 ];
 
 const xpFacetContractNames = [
-  "DiamondCutFacet",
+  //  "DiamondCutFacet",
   "DiamondLoupeFacet",
   "OwnershipFacet",
   "ERC725YFacet",
@@ -108,7 +109,7 @@ const xpFacetContractNames = [
 ];
 
 const lxpFacetContractNames = [
-  "DiamondCutFacet",
+  // "DiamondCutFacet",
   "DiamondLoupeFacet",
   "OwnershipFacet",
   "ERC725YFacet",
@@ -165,7 +166,15 @@ const makeRunContractMapping = async () => {
 };
 
 const deployFacets = async (testEnv = false) => {
-  const signer = await ethers.getSigner();
+  console.log("deploying facets", runListFacetContractNames);
+  const contract = await ethers.deployContract("LXPFacet");
+  await contract.waitForDeployment();
+  console.log("the addr", contract.target);
+  //const f = await contract.deploy();
+  // console.log("the addr", f.address);
+  // await f.deployed();
+  console.log("finished");
+  /*const signer = await ethers.getSigner();
   const chainId = await signer.getChainId();
   const contractFacetData = [];
   forgeReqs["global"] = runListFacetContractNames;
@@ -174,10 +183,14 @@ const deployFacets = async (testEnv = false) => {
     JSON.stringify(forgeReqs, null, 2)
   );
   for (const contractName of runListFacetContractNames) {
+    console.log("rpc issue", await signer.getBalance());
+    console.log("deploying facets", contractName);
     const contract = await ethers.getContractFactory(contractName, signer);
+    console.log("got the contract with signer", await signer.getAddress());
     const facet = await contract.deploy();
-    const addr = facet.address;
-    await facet.deployed();
+    console.log("made it here", facet.address);
+    //const addr = await facet.waitForDeployment();
+    const addr = await facet.deployed();
     contractFacetData.push({
       name: contractName,
       address: addr,
@@ -213,7 +226,7 @@ const deployFacets = async (testEnv = false) => {
     FORGE_REGISTER_CONFIG_PATH,
     JSON.stringify(forgeResults, null, 2)
   );
-  return forgeResults;
+  return forgeResults; 
 };
 
 const deployLauncher = async () => {
@@ -264,18 +277,77 @@ const deployLauncher = async () => {
   const lvlsLauncher = ILvlsContractLauncher__factory.connect(addr, signer);
   // configure the facets for the launcher
   console.log("past it");
+
+  const cutAddress = (deploymentConfig[chainId] as any).DiamondCutFacet
+    .facetAddress;
+  const loupeAddress = (deploymentConfig[chainId] as any).DiamondLoupeFacet
+    .facetAddress;
+  // set the default diamond address
+  await (
+    await lvlsLauncher.setDiamondAddresses(
+      cutAddress,
+      loupeAddress,
+      zeroAddress
+    )
+  ).wait();
   await (await lvlsLauncher.setLXPFacetCuts(xpCuts)).wait();
   await (await lvlsLauncher.setXPFacetCuts(lxpCuts)).wait();
   await (await lvlsLauncher.setLvlsFacetCuts(lvlCuts)).wait();
 
+  //  console.log("lvl cuts----", xpCuts, lxpCuts, lvlCuts);
+
   console.log("writing deployed launcher", addr);
   writeFileSync(CONFIG_LAUNCHER_PATH, JSON.stringify(config, null, 2));
+};*/
+
+const deployFacets = async (testEnv = false) => {
+  //console.log("deploying facets", runListFacetContractNames);
+
+  const gasEstimate = await ethers.provider.getFeeData();
+  console.log("gas estimate", gasEstimate);
+  console.log("deploying");
+  const store = ethers.getContractFactory("Storage");
+  ethers.provider.estimate;
+  const contract = await ethers.deployContract("Storage", {
+    gas: gasEstimate,
+    gasLimit: 125701,
+    maxPriorityFeePerGas: "2500000000",
+    baseFee: 7
+  });
+  await contract.waitForDeployment();
+  console.log("the addr", contract.target);
+  //const f = await contract.deploy();
+  // console.log("the addr", f.address);
+  // await f.deployed();
+  console.log("finished");
+  /*const signer = await ethers.getSigner();
+  const chainId = await signer.getChainId();
+  const contractFacetData = [];
+  forgeReqs["global"] = runListFacetContractNames;
+  fs.writeFileSync(
+    FORGE_REQUIREMENTS_CONFIG_PATH,
+    JSON.stringify(forgeReqs, null, 2)
+  );
+  for (const contractName of runListFacetContractNames) {
+    console.log("rpc issue", await signer.getBalance());
+    console.log("deploying facets", contractName);
+    const contract = await ethers.getContractFactory(contractName, signer);
+    console.log("got the contract with signer", await signer.getAddress());
+    const facet = await contract.deploy();
+    console.log("made it here", facet.address);
+    //const addr = await facet.waitForDeployment();
+    const addr = await facet.deployed();
+    contractFacetData.push({
+      name: contractName,
+      address: addr,
+      contract
+    });*/
 };
 
 async function main() {
-  await deployFacets();
   try {
-    await deployLauncher();
+    await deployFacets();
+    //  await deployLauncher();
   } catch (e) {
     console.log(e);
   }

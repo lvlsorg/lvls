@@ -3,12 +3,35 @@ import {LSP7DigitalAssetFacet} from "./LSP7DigitalAssetFacet.sol";
 import {LibXP} from "../libraries/LibXP.sol";
 import "../libraries/LSP7Errors.sol";
 import {ILSP7XP} from "../interfaces/ILSP7XP.sol";
+import {LibOwnership} from "../libraries/LibOwnership.sol";
 import "hardhat/console.sol";
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract XPLSP7TokenFacet is LSP7DigitalAssetFacet {
+    function _msgSender() internal view returns (address sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(mload(add(array, index)), 0xffffffffffffffffffffffffffffffffffffffff)
+            }
+            if (address(sender) == address(0)) {
+                sender = msg.sender;
+            }
+        } else {
+            sender = msg.sender;
+        }
+        return sender;
+    }
+
+    modifier onlyOwner() {
+        LibOwnership.OwnershipStorage storage ds = LibOwnership.diamondStorage();
+        require(ds.contractOwner == _msgSender(), "only owner");
+        _;
+    }
+
     function mint(address to, uint256 amount, bool allowNonLSP1Recipient, bytes memory data) public virtual override onlyOwner {
         console.log("minting");
         LibXP.LibXPStorage storage xps = LibXP.libXPStorage();
