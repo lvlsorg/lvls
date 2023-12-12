@@ -10,10 +10,22 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "eslint": "^7.32.0",
     "eslint-config-custom": "*",
-    "eslint": "7.32.0",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "packageManager": "npm@8.19.4"
+  "packageManager": "npm@8.19.4",
+  "dependencies": {
+    "@xstate/react": "^3.2.2",
+    "axios": "^1.4.0",
+    "classnames": "^2.3.2",
+    "discord.js": "^14.11.0",
+    "framer-motion": "^10.12.18",
+    "jsonwebtoken": "^9.0.0",
+    "xstate": "^4.37.2"
+  }
 }

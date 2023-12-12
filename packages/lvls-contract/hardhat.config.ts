@@ -6,7 +6,7 @@
 
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
-import "@nomiclabs/hardhat-ethers";
+import "@nomicfoundation/hardhat-ethers";
 import dotenv from "dotenv";
 import "hardhat-contract-sizer";
 
@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
   },
   defaultNetwork: "hardhat",
   typechain: {
-    target: "ethers-v5",
+    target: "ethers-v6",
     outDir: "src/generated/typechain"
   },
   paths: {
@@ -44,6 +44,12 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8545",
       accounts: [PRIV_KEY],
       chainId: 31337
+    },
+    testnet: {
+      url: "https://rpc.testnet.lukso.network",
+      accounts: [PRIV_KEY],
+      gasPrice: 10000000,
+      chainId: 4201
     },
     mainnet: {
       url: "https://mainnet.infura.io/v3/2f4d92a0ef5b4b05a0219323bc6b8cbd",

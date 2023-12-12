@@ -2,6 +2,8 @@
   "name": "lvls-contract",
   "version": "0.0.0-development",
   "private": true,
+  "main": "./src/generated/typechain/index.ts",
+  "types": "./src/generated/typechain/index.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -9,20 +11,23 @@
   "scripts": {
     "contract:generated-forge": "npx hardhat run hardhat-scripts/forge.ts",
     "contract:deploy": "npx hardhat run hardhat-scripts/deployNewFacets.ts --network localhost",
+    "contract:deploy-testnet": "npx hardhat run hardhat-scripts/deployNewFacets.ts --network testnet",
     "contract:types": "rm src/artifacts/contracts/**/*.dbg.json; typechain --target ethers-v5 --out-dir src/generated/typechain src/artifacts/contracts/**/*.json --show-stack-traces"
   },
   "dependencies": {
-    "@erc725/smart-contracts": "^5.0.0",
-    "@lukso/lsp-smart-contracts": "file:lukso-lsp-smart-contracts-0.9.0.tgz",
+    "@erc725/smart-contracts": "^7.0.0",
+    "@lukso/lsp-smart-contracts": "^0.12.1",
     "@openzeppelin/contracts": "^4.8.3",
     "dotenv": "^16.0.3",
     "solidity-bytes-utils": "^0.8.0"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomicfoundation/hardhat-ethers": "^3.0.4",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash": "^4.14.194",
-    "hardhat": "^2.14.0",
+    "ethers": "^6.7.1",
+    "hardhat": "^2.17.3",
     "hardhat-contract-sizer": "^2.8.0",
     "ts-node": "^10.9.1"
   }
