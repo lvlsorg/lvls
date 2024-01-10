@@ -5,9 +5,6 @@
     "DiamondLoupeFacet",
     "OwnershipFacet",
     "ERC725YFacet",
-    "LSP7DigitalAssetFacet",
-    "XPLSP7TokenFacet",
-    "LXPFacet",
     "SoulboundDecayStakingFacet",
     "LvlsLauncherFacet"
   ]
